@@ -9,6 +9,7 @@ module "eks-cluster" {
   public_subnets  = ["subnet-d47de6b3", "subnet-f5bc28bc", "subnet-68c32130"]
 
   worker_group_count = 2
+
   workers = [
     {
       autoscaling_enabled  = true
@@ -49,6 +50,6 @@ module "eks-cluster" {
       root_volume_size = 100
 
       kubelet_extra_args = "--node-labels=spot=true"
-    }
+    },
   ]
 }

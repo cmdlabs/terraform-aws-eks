@@ -1,9 +1,13 @@
-VERSION = 0.1
+VERSION = 0.1.0
 
 PHONY: tag
 tag:
 	git tag $(VERSION)
 	git push origin $(VERSION)
+
+PHONY: format
+format:
+	terraform fmt .
 
 PHONY: docs
 docs:

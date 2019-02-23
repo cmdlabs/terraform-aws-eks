@@ -53,7 +53,7 @@ resource "aws_iam_role_policy_attachment" "workers_external_dns" {
 }
 
 resource "aws_iam_role_policy_attachment" "workers_ingress_alb" {
-  count      = "${var.enable_ingress_alb ? 1 : 0}"
+  count      = "${var.enable_alb_ingress ? 1 : 0}"
   policy_arn = "${aws_iam_policy.worker_alb_ingress.arn}"
   role       = "${aws_iam_role.workers.name}"
 }

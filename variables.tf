@@ -56,11 +56,6 @@ variable "enable_velero" {
   default     = true
 }
 
-variable "enable_velero" {
-  description = "Enable required components for Velero"
-  default     = false
-}
-
 variable "workers" {
   description = "List of worker groups"
   type        = "list"

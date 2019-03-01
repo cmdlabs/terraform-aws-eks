@@ -14,6 +14,7 @@ This module implementes an EKS cluster and associated worker groups. It utilised
 | enable\_ecr | Enable required components for Amazon ECR Read Only | string | `"true"` | no |
 | enable\_external\_dns | Enable required components for External-DNS | string | `"true"` | no |
 | enable\_ssm | Enable required components for SSM | string | `"true"` | no |
+| enable\_velero | Enable required components for Velero | string | `"true"` | no |
 | private\_subnets | Private tier subnet list | list | n/a | yes |
 | public\_subnets | Public tier subnet list | list | n/a | yes |
 | vpc\_id | VPC ID for EKS Cluster | string | n/a | yes |

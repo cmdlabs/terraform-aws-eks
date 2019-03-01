@@ -47,7 +47,12 @@ variable "enable_alb_ingress" {
 }
 
 variable "enable_cluster_autoscaler" {
-  description = "Enable required components for Cluster Autoscaler. "
+  description = "Enable required components for Cluster Autoscaler"
+  default     = true
+}
+
+variable "enable_velero" {
+  description = "Enable required components for Velero"
   default     = true
 }
 

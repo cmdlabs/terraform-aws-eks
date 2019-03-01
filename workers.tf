@@ -4,7 +4,7 @@ resource "aws_autoscaling_group" "workers" {
   desired_capacity    = "${lookup(var.workers[count.index], "asg_desired_capacity", 1)}"
   min_size            = "${lookup(var.workers[count.index], "asg_min_size", 1)}"
   max_size            = "${lookup(var.workers[count.index], "asg_max_size", 10)}"
-  vpc_zone_identifier = "${var.private_subnets}"
+  vpc_zone_identifier = ["${var.private_subnets}"]
 
   mixed_instances_policy {
     instances_distribution {

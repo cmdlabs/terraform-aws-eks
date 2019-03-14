@@ -63,3 +63,9 @@ resource "aws_iam_role_policy_attachment" "workers_cert_manager" {
   policy_arn = "${aws_iam_policy.worker_cert_manager.arn}"
   role       = "${aws_iam_role.workers.name}"
 }
+
+resource "aws_iam_role_policy_attachment" "workers_velero" {
+  count      = "${var.enable_velero ? 1 : 0}"
+  policy_arn = "${aws_iam_policy.worker_velero.arn}"
+  role       = "${aws_iam_role.workers.name}"
+}

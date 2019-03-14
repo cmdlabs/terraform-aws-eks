@@ -251,3 +251,41 @@ data "aws_iam_policy_document" "worker_cert_manager" {
     ]
   }
 }
+
+resource "aws_iam_policy" "worker_velero" {
+  name        = "eks-worker-velero-${var.cluster_name}"
+  description = "EKS worker node velero for cluster ${var.cluster_name}"
+  policy      = "${data.aws_iam_policy_document.worker_velero.json}"
+}
+
+data "aws_iam_policy_document" "worker_velero" {
+  statement {
+    effect = "Allow"
+
+    actions = [
+      "ec2:DescribeVolumes",
+      "ec2:DescribeSnapshots",
+      "ec2:CreateTags",
+      "ec2:CreateVolume",
+      "ec2:CreateSnapshot",
+      "ec2:DeleteSnapshot",
+    ]
+
+    resources = ["*"]
+  }
+
+  statement {
+    effect = "Allow"
+
+    actions = [
+      "s3:GetObject",
+      "s3:DeleteObject",
+      "s3:PutObject",
+      "s3:AbortMultipartUpload",
+      "s3:ListMultipartUploadParts",
+      "s3:ListBucket"
+    ]
+
+    resources = ["*"]
+  }
+}

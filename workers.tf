@@ -6,6 +6,8 @@ resource "aws_autoscaling_group" "workers" {
   max_size            = "${lookup(var.workers[count.index], "asg_max_size", 10)}"
   vpc_zone_identifier = ["${var.private_subnets}"]
 
+  suspended_processes = "${lookup(var.workers[count.index], "suspended_processes", "[]")}"
+
   mixed_instances_policy {
     instances_distribution {
       on_demand_allocation_strategy            = "${lookup(var.workers[count.index], "on_demand_allocation_strategy" , "prioritized")}"

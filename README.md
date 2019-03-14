@@ -32,6 +32,7 @@ It is possible to customise individual parameters on the the workers list.
 | desired\_capacity | ASG desired capacity. Ignored after creation | string | `"1"` | no |
 | min\_size | ASG minimum size | string | `"1"` | no |
 | max\_size | ASG maximum size | string | `"10"` | no |
+| suspended\_processes | A list of processes to suspend for the AutoScaling Group | list | `[]` | no |
 | on\_demand\_allocation\_strategy | Strategy to use when launching on-demand instances | string | `"prioritized"` | no |
 | on\_demand\_base\_capacity | Absolute minimum amount of desired capacity that must be fulfilled by on-demand instances | string | `"0"` | no |
 | on\_demand\_percentage\_above\_base_capacity | Percentage split between on-demand and spot instances above the base on-demand capacity | string | `"0"` | no |

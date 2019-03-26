@@ -4,7 +4,7 @@ resource "aws_autoscaling_group" "workers" {
   desired_capacity    = "${lookup(var.workers[count.index], "asg_desired_capacity", 1)}"
   min_size            = "${lookup(var.workers[count.index], "asg_min_size", 1)}"
   max_size            = "${lookup(var.workers[count.index], "asg_max_size", 10)}"
-  vpc_zone_identifier = ["${var.private_subnets}"]
+  vpc_zone_identifier = ["${split(",", coalesce(lookup(var.workers[count.index], "vpc_subnets", ""), join(",", var.private_subnets)))}"]
 
   suspended_processes = ["${compact(split(",", lookup(var.workers[count.index], "suspended_processes", "")))}"]
   enabled_metrics = ["${compact(split(",", lookup(var.workers[count.index], "enabled_metrics", "")))}"]

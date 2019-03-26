@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Add support for EKS Public/Private endpoint configuration
+- Add support for specifying subnets per ASG to work around PV scheduling limitations
 
 ## [0.3.0] - 2019-03-15
 ### Added

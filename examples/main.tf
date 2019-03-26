@@ -17,6 +17,8 @@ module "eks-cluster" {
       asg_min_size         = 0
       asg_max_size         = 5
 
+      vpc_subnets = "subnet-457ee522,subnet-c0b82c89,subnet-2cc22074"
+
       on_demand_allocation_strategy            = "prioritized"
       on_demand_base_capacity                  = 0
       on_demand_percentage_above_base_capacity = 0

@@ -1,7 +1,7 @@
 module "eks-cluster" {
   source = "../"
 
-  cluster_name    = "cmdlab-bugfix"
+  cluster_name    = "cmdlab"
   cluster_version = "1.11"
 
   vpc_id          = "vpc-4df92b2a"

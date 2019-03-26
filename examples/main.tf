@@ -1,7 +1,7 @@
 module "eks-cluster" {
   source = "../"
 
-  cluster_name    = "cmdlab"
+  cluster_name    = "cmdlab-bugfix"
   cluster_version = "1.11"
 
   vpc_id          = "vpc-4df92b2a"
@@ -24,8 +24,7 @@ module "eks-cluster" {
       spot_max_price                           = ""
 
       instance_type_1 = "m5.large"
-      instance_type_2 = "c5.large"
-      instance_type_3 = "r5.large"
+      instance_type_2 = "m4.large"
 
       root_volume_size = 100
 
@@ -43,9 +42,8 @@ module "eks-cluster" {
       spot_allocation_strategy                 = "lowest-price"
       spot_max_price                           = ""
 
-      instance_type_1 = "m4.large"
-      instance_type_2 = "c4.large"
-      instance_type_3 = "r4.large"
+      instance_type_1 = "r5.large"
+      instance_type_2 = "r4.large"
 
       root_volume_size = 100
 

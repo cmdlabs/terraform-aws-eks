@@ -30,12 +30,9 @@ resource "aws_autoscaling_group" "workers" {
       }
 
       override {
-        instance_type = "${lookup(var.workers[count.index], "instance_type_2", "c5.large")}"
+        instance_type = "${lookup(var.workers[count.index], "instance_type_2", "m4.large")}"
       }
 
-      override {
-        instance_type = "${lookup(var.workers[count.index], "instance_type_3", "r5.large")}"
-      }
     }
   }
 

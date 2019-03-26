@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed 
 - Add cluster owned tag on the default worker security group so the ELB controller is able to find it when multiple security groups are applied to nodes
 
+### Added
+- Add support for EKS Public/Private endpoint configuration
+
 ## [0.3.0] - 2019-03-15
 ### Added
 - suspended_processes on worker groups

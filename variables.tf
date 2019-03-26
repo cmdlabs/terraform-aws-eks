@@ -69,3 +69,13 @@ variable "worker_group_count" {
 variable "vpc_id" {
   description = "VPC ID for EKS Cluster"
 }
+
+variable "cluster_endpoint_private_access" {
+  description = "Enable Amazon EKS private API server endpoint."
+  default     = false
+}
+
+variable "cluster_endpoint_public_access" {
+  description = "Enable Amazon EKS public API server endpoint."
+  default     = true
+}

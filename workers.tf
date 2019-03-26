@@ -4,7 +4,7 @@ resource "aws_autoscaling_group" "workers" {
   desired_capacity    = "${lookup(var.workers[count.index], "asg_desired_capacity", 1)}"
   min_size            = "${lookup(var.workers[count.index], "asg_min_size", 1)}"
   max_size            = "${lookup(var.workers[count.index], "asg_max_size", 10)}"
-  vpc_zone_identifier = ["${var.private_subnets}"]
+  vpc_zone_identifier = ["${split(",", coalesce(lookup(var.workers[count.index], "vpc_subnets", ""), join(",", var.private_subnets)))}"]
 
   suspended_processes = ["${compact(split(",", lookup(var.workers[count.index], "suspended_processes", "")))}"]
   enabled_metrics = ["${compact(split(",", lookup(var.workers[count.index], "enabled_metrics", "")))}"]
@@ -30,12 +30,9 @@ resource "aws_autoscaling_group" "workers" {
       }
 
       override {
-        instance_type = "${lookup(var.workers[count.index], "instance_type_2", "c5.large")}"
+        instance_type = "${lookup(var.workers[count.index], "instance_type_2", "m4.large")}"
       }
 
-      override {
-        instance_type = "${lookup(var.workers[count.index], "instance_type_3", "r5.large")}"
-      }
     }
   }
 
@@ -94,6 +91,8 @@ resource "aws_security_group" "workers" {
   name        = "eks-${var.cluster_name}-workers"
   description = "Security group for worker nodes of cluster ${var.cluster_name}"
   vpc_id      = "${var.vpc_id}"
+
+  tags = "${map("kubernetes.io/cluster/${var.cluster_name}", "owned")}"
 }
 
 resource "aws_security_group_rule" "worker_to_worker" {

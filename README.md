@@ -20,6 +20,8 @@ This module implementes an EKS cluster and associated worker groups. It utilised
 | vpc\_id | VPC ID for EKS Cluster | string | n/a | yes |
 | worker\_group\_count | Count of worker groups. Set to 0 to disable worker creation | string | `"1"` | no |
 | workers | List of worker groups options objects | list | n/a | yes |
+| cluster_endpoint_private_access | Enable Amazon EKS private API server endpoint | string | `"false"` | no |
+| cluster_endpoint_public_access | Enable Amazon EKS public API server endpoint | string | `"true"` | no |
 
 ## Worker Group Options
 It is possible to customise individual parameters on the the workers list. 
@@ -41,13 +43,13 @@ It is possible to customise individual parameters on the the workers list.
 | spot\_instance\_pools | Number of Spot pools per availability zone to allocate capacity | string | `"10"` | no |
 | spot\_max\_price | Maximum price youre willing to pay for spot instances. Defaults to the on demand price if blank | string | `""` | no |
 | instance\_type\_1 | First instance type used by the ASG | string | `"m5.large"` | no |
-| instance\_type\_2 | Second instance type used by the ASG | string | `"c5.large"` | no |
-| instance\_type\_3 | Third instance type used by the ASG | string | `"r5.large"` | no |
+| instance\_type\_2 | Second instance type used by the ASG | string | `"m4.large"` | no |
 | detailed\_monitoring | Enable EC2 detailed monitoring | string | `"false"` | no |
 | iam\_role\_name | Override the role that this module generates | string | `""` | no |
 | kubelet\_extra\_args | Additional arguments to pass to the kubelet | string| `""` | no |
 | pre\_userdata | Userdata to prepend to the standard userdata | string | `""` | no |
 | additional\_userdata | Userdata to append to the standard userdata | string | `""` | no |
+| vpc\_subnets | A comma seperated string of subnets for the ASG to place instances in | string | `var.private_subnets` | no
 
 ## Outputs
 | Name | Description |

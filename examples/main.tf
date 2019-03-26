@@ -17,6 +17,8 @@ module "eks-cluster" {
       asg_min_size         = 0
       asg_max_size         = 5
 
+      vpc_subnets = "subnet-457ee522,subnet-c0b82c89,subnet-2cc22074"
+
       on_demand_allocation_strategy            = "prioritized"
       on_demand_base_capacity                  = 0
       on_demand_percentage_above_base_capacity = 0
@@ -24,8 +26,7 @@ module "eks-cluster" {
       spot_max_price                           = ""
 
       instance_type_1 = "m5.large"
-      instance_type_2 = "c5.large"
-      instance_type_3 = "r5.large"
+      instance_type_2 = "m4.large"
 
       root_volume_size = 100
 
@@ -43,9 +44,8 @@ module "eks-cluster" {
       spot_allocation_strategy                 = "lowest-price"
       spot_max_price                           = ""
 
-      instance_type_1 = "m4.large"
-      instance_type_2 = "c4.large"
-      instance_type_3 = "r4.large"
+      instance_type_1 = "r5.large"
+      instance_type_2 = "r4.large"
 
       root_volume_size = 100
 

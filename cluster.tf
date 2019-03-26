@@ -7,6 +7,9 @@ resource "aws_eks_cluster" "this" {
   vpc_config = {
     security_group_ids = ["${aws_security_group.cluster.id}"]
     subnet_ids         = ["${var.private_subnets}"]
+
+    endpoint_private_access = "${var.cluster_endpoint_private_access}"
+    endpoint_public_access  = "${var.cluster_endpoint_public_access}"
   }
 
   depends_on = [

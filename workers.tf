@@ -94,6 +94,8 @@ resource "aws_security_group" "workers" {
   name        = "eks-${var.cluster_name}-workers"
   description = "Security group for worker nodes of cluster ${var.cluster_name}"
   vpc_id      = "${var.vpc_id}"
+
+  tags = "${map("kubernetes.io/cluster/${var.cluster_name}", "owned")}"
 }
 
 resource "aws_security_group_rule" "worker_to_worker" {

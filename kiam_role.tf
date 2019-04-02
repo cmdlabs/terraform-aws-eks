@@ -72,6 +72,13 @@ resource "aws_iam_role" "kiam_server" {
   assume_role_policy = "${data.aws_iam_policy_document.kiam_server_trust_policy.json}"
 }
 
+resource "aws_iam_role_policy_attachment" "kiam_server" {
+  count = "${var.enable_kiam ? 1 : 0}"
+  policy_arn = "${aws_iam_policy.kiam_assume.arn}"
+  role = "${aws_iam_role.kiam_server.name}"
+}
+
+
 resource "aws_iam_role" "kiam_external_dns" {
   count = "${var.enable_external_dns && var.enable_kiam ? 1 : 0}"
   name = "eks-${var.cluster_name}-kiam-external-dns"

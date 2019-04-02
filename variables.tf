@@ -79,3 +79,8 @@ variable "cluster_endpoint_public_access" {
   description = "Enable Amazon EKS public API server endpoint."
   default     = true
 }
+
+variable "enable_kiam" {
+  description = "Create IAM roles to be used by KIAM. This requires KIAM to be active and deployed to your cluster for IAM roles to work."
+  default     = true
+}

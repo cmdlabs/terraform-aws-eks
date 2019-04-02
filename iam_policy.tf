@@ -14,7 +14,7 @@ data "aws_iam_policy_document" "worker_autoscaling" {
       "autoscaling:DescribeAutoScalingInstances",
       "autoscaling:DescribeLaunchConfigurations",
       "autoscaling:DescribeTags",
-      "ec2:DescribeLaunchTemplateVersions"
+      "ec2:DescribeLaunchTemplateVersions",
     ]
 
     resources = ["*"]
@@ -284,7 +284,7 @@ data "aws_iam_policy_document" "worker_velero" {
       "s3:PutObject",
       "s3:AbortMultipartUpload",
       "s3:ListMultipartUploadParts",
-      "s3:ListBucket"
+      "s3:ListBucket",
     ]
 
     resources = ["*"]

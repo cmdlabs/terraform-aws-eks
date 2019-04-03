@@ -50,7 +50,6 @@ resource "aws_iam_role_policy_attachment" "kiam_workers_assume" {
   role       = "${aws_iam_role.workers_kiam.name}"
 }
 
-
 data "aws_iam_policy_document" "kiam_server_trust_policy" {
   statement {
     actions = ["sts:AssumeRole"]
@@ -60,6 +59,18 @@ data "aws_iam_policy_document" "kiam_server_trust_policy" {
       identifiers = ["arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/eks-${var.cluster_name}-workers-kiam"]
     }
   }
+}
+
+resource "aws_iam_role" "kiam_server" {
+  count              = "${var.enable_kiam ? 1 : 0}"
+  name               = "eks-${var.cluster_name}-kiam-server"
+  assume_role_policy = "${data.aws_iam_policy_document.kiam_server_trust_policy.json}"
+}
+
+resource "aws_iam_role_policy_attachment" "kiam_server" {
+  count      = "${var.enable_kiam ? 1 : 0}"
+  policy_arn = "${aws_iam_policy.kiam_assume.arn}"
+  role       = "${aws_iam_role.kiam_server.name}"
 }
 
 data "aws_iam_policy_document" "kiam_role_trust_policy" {
@@ -73,22 +84,9 @@ data "aws_iam_policy_document" "kiam_role_trust_policy" {
   }
 }
 
-resource "aws_iam_role" "kiam_server" {
-  count = "${var.enable_kiam ? 1 : 0}"
-  name = "eks-${var.cluster_name}-kiam-server"
-  assume_role_policy = "${data.aws_iam_policy_document.kiam_server_trust_policy.json}"
-}
-
-resource "aws_iam_role_policy_attachment" "kiam_server" {
-  count = "${var.enable_kiam ? 1 : 0}"
-  policy_arn = "${aws_iam_policy.kiam_assume.arn}"
-  role = "${aws_iam_role.kiam_server.name}"
-}
-
-
 resource "aws_iam_role" "kiam_external_dns" {
-  count = "${var.enable_external_dns && var.enable_kiam ? 1 : 0}"
-  name = "eks-${var.cluster_name}-kiam-external-dns"
+  count              = "${var.enable_external_dns && var.enable_kiam ? 1 : 0}"
+  name               = "eks-${var.cluster_name}-kiam-external-dns"
   assume_role_policy = "${data.aws_iam_policy_document.kiam_role_trust_policy.json}"
 }
 
@@ -99,8 +97,8 @@ resource "aws_iam_role_policy_attachment" "kiam_workers_external_dns" {
 }
 
 resource "aws_iam_role" "kiam_cluster_autoscaler" {
-  count = "${var.enable_cluster_autoscaler && var.enable_kiam ? 1 : 0}"
-  name = "eks-${var.cluster_name}-kiam-cluster-autoscaler"
+  count              = "${var.enable_cluster_autoscaler && var.enable_kiam ? 1 : 0}"
+  name               = "eks-${var.cluster_name}-kiam-cluster-autoscaler"
   assume_role_policy = "${data.aws_iam_policy_document.kiam_role_trust_policy.json}"
 }
 
@@ -111,8 +109,8 @@ resource "aws_iam_role_policy_attachment" "kiam_cluster_autoscaler" {
 }
 
 resource "aws_iam_role" "kiam_ingress_alb" {
-  count = "${var.enable_alb_ingress && var.enable_kiam ? 1 : 0}"
-  name = "eks-${var.cluster_name}-kiam-ingress-alb"
+  count              = "${var.enable_alb_ingress && var.enable_kiam ? 1 : 0}"
+  name               = "eks-${var.cluster_name}-kiam-ingress-alb"
   assume_role_policy = "${data.aws_iam_policy_document.kiam_role_trust_policy.json}"
 }
 
@@ -123,8 +121,8 @@ resource "aws_iam_role_policy_attachment" "kiam_ingress_alb" {
 }
 
 resource "aws_iam_role" "kiam_cert_manager" {
-  count = "${var.enable_cert_manager && var.enable_kiam ? 1 : 0}"
-  name = "eks-${var.cluster_name}-kiam-cert-manager"
+  count              = "${var.enable_cert_manager && var.enable_kiam ? 1 : 0}"
+  name               = "eks-${var.cluster_name}-kiam-cert-manager"
   assume_role_policy = "${data.aws_iam_policy_document.kiam_role_trust_policy.json}"
 }
 
@@ -135,8 +133,8 @@ resource "aws_iam_role_policy_attachment" "kiam_cert_manager" {
 }
 
 resource "aws_iam_role" "kiam_velero" {
-  count = "${var.enable_velero && var.enable_kiam ? 1 : 0}"
-  name = "eks-${var.cluster_name}-kiam-velero"
+  count              = "${var.enable_velero && var.enable_kiam ? 1 : 0}"
+  name               = "eks-${var.cluster_name}-kiam-velero"
   assume_role_policy = "${data.aws_iam_policy_document.kiam_role_trust_policy.json}"
 }
 

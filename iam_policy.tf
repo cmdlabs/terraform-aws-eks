@@ -302,7 +302,7 @@ data "aws_iam_policy_document" "kiam_worker_assume" {
     effect = "Allow"
 
     actions = [
-      "sts:AssumeRole"
+      "sts:AssumeRole",
     ]
 
     resources = ["${aws_iam_role.kiam_server.arn}"]
@@ -320,7 +320,7 @@ data "aws_iam_policy_document" "kiam_assume" {
     effect = "Allow"
 
     actions = [
-      "sts:AssumeRole"
+      "sts:AssumeRole",
     ]
 
     resources = ["*"]

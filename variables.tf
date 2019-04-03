@@ -87,107 +87,95 @@ variable "enable_kiam" {
 
 variable "kiam_ami_id" {
   description = "KIAM instances AMI ID"
-  default = ""
+  default     = ""
 }
 
 variable "kiam_root_volume_size" {
   description = "KIAM instances root volume size"
-  default = 100
+  default     = 100
 }
 
 variable "kiam_autoscaling_enabled" {
   description = "Allows cluster-autoscaler to manage this ASG"
-  default = "true"
+  default     = "true"
 }
 
 variable "kiam_asg_desired" {
   description = "ASG Desired Size"
-  default = "2"
+  default     = "2"
 }
 
 variable "kiam_asg_min" {
   description = "ASG Minimum Size"
-  default = "2"
+  default     = "2"
 }
 
 variable "kiam_asg_max" {
   description = "ASG Maximum Size"
-  default = "5"
+  default     = "5"
 }
 
 variable "kiam_on_demand_allocation_strategy" {
   description = "Strategy to use when launching on-demand instances"
-  default = "prioritized"
+  default     = "prioritized"
 }
 
 variable "kiam_on_demand_base_capacity" {
   description = "Absolute minimum amount of desired capacity that must be fulfilled by on-demand instances"
-  default = "0"  
+  default     = "0"
 }
 
 variable "kiam_on_demand_percentage_above_base_capacity" {
   description = "Percentage split between on-demand and spot instances above the base on-demand capacity"
-  default = "0"  
+  default     = "0"
 }
-
 
 variable "kiam_spot_allocation_strategy" {
   description = "How to allocate capacity across the Spot pools"
-  default = "lowest-price"  
+  default     = "lowest-price"
 }
 
 variable "kiam_spot_instance_pools" {
   description = "Number of Spot pools per availability zone to allocate capacity"
-  default = 10  
+  default     = 10
 }
 
 variable "kiam_spot_max_price" {
   description = "Maximum price youre willing to pay for spot instances. Defaults to the on demand price if blank"
-  default = ""
+  default     = ""
 }
 
 variable "kiam_instance_type_1" {
   description = "First choice of instace type that will be used by the KIAM ASG"
-  default = "t3.small"
+  default     = "t3.small"
 }
 
 variable "kiam_instance_type_2" {
   description = "Second choice of instance type that will be used by the KIAM ASG"
-  default = "t2.small"
+  default     = "t2.small"
 }
 
 variable "kiam_detailed_monitoring" {
   description = "Enabled detailed monitoring of KIAM instances"
-  default = false
+  default     = false
 }
 
 variable "kiam_kubelet_extra_args" {
   description = "Additional arguments to pass to the kubelet"
-  default = "--node-labels=spot=true,node-role.kubernetes.io/kiam=true --register-with-taints=node-role.kubernetes.io/kiam=true:NoSchedule"
+  default     = "--node-labels=spot=true,node-role.kubernetes.io/kiam=true --register-with-taints=node-role.kubernetes.io/kiam=true:NoSchedule"
 }
 
 variable "kiam_pre_userdata" {
   description = "Userdata to prepend to the standard userdata"
-  default = ""
+  default     = ""
 }
 
 variable "kiam_additonal_userdata" {
   description = "Userdata to append to the standard userdata"
-  default = ""
+  default     = ""
 }
 
 variable "kiam_vpc_subnets" {
   description = "A comma seperated string of subnets for the ASG to place kiam instances in"
-  default = ""
+  default     = ""
 }
-
-
-
-
-
-
-
-
-
-
-

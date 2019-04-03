@@ -1,5 +1,5 @@
 module "eks-cluster" {
-  source = "../../"
+  source = "../"
 
   cluster_name    = "cmdlab"
   cluster_version = "1.12"
@@ -9,7 +9,6 @@ module "eks-cluster" {
   public_subnets  = ["subnet-d47de6b3", "subnet-f5bc28bc", "subnet-68c32130"]
 
   enable_kiam = true
-
 
   worker_group_count = 1
 

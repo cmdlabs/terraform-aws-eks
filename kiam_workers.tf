@@ -1,9 +1,10 @@
 resource "aws_autoscaling_group" "kiam_workers" {
-  count = "${var.enable_kiam ? 1 : 0}"
-  name_prefix         = "eks-${var.cluster_name}-kiam-workers"
-  desired_capacity    = "${var.kiam_asg_desired}"
-  min_size            = "${var.kiam_asg_min}"
-  max_size            = "${var.kiam_asg_max}"
+  count            = "${var.enable_kiam ? 1 : 0}"
+  name_prefix      = "eks-${var.cluster_name}-kiam-workers"
+  desired_capacity = "${var.kiam_asg_desired}"
+  min_size         = "${var.kiam_asg_min}"
+  max_size         = "${var.kiam_asg_max}"
+
   #Make this configurable
   vpc_zone_identifier = ["${var.private_subnets}"]
 
@@ -35,12 +36,10 @@ resource "aws_autoscaling_group" "kiam_workers" {
       }
     }
   }
-
   lifecycle {
     create_before_destroy = true
     ignore_changes        = ["desired_capacity"]
   }
-
   tags = ["${concat(
     list(
       map("key", "Name", "value", "eks-${var.cluster_name}-workergroup-kiam", "propagate_at_launch", "true"),
@@ -51,7 +50,7 @@ resource "aws_autoscaling_group" "kiam_workers" {
 }
 
 resource "aws_launch_template" "kiam_workers" {
-  count = "${var.enable_kiam ? 1 : 0}"
+  count       = "${var.enable_kiam ? 1 : 0}"
   name_prefix = "eks-${var.cluster_name}-kiam-workers"
 
   image_id               = "${coalesce(var.kiam_ami_id, data.aws_ami.eks_worker.id)}"

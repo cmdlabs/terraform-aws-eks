@@ -44,6 +44,13 @@ resource "aws_iam_role_policy_attachment" "kiam_workers_AmazonEC2RoleforSSM" {
   role       = "${aws_iam_role.workers_kiam.name}"
 }
 
+resource "aws_iam_role_policy_attachment" "kiam_workers_assume" {
+  count      = "${var.enable_kiam ? 1 : 0}"
+  policy_arn = "${aws_iam_policy.kiam_worker_assume.arn}"
+  role       = "${aws_iam_role.workers_kiam.name}"
+}
+
+
 data "aws_iam_policy_document" "kiam_server_trust_policy" {
   statement {
     actions = ["sts:AssumeRole"]

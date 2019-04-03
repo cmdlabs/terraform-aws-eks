@@ -291,6 +291,24 @@ data "aws_iam_policy_document" "worker_velero" {
   }
 }
 
+resource "aws_iam_policy" "kiam_worker_assume" {
+  name        = "eks-worker-kiam-worker-assume-${var.cluster_name}"
+  description = "EKS worker node KIAM Assume for cluster ${var.cluster_name}"
+  policy      = "${data.aws_iam_policy_document.kiam_worker_assume.json}"
+}
+
+data "aws_iam_policy_document" "kiam_worker_assume" {
+  statement {
+    effect = "Allow"
+
+    actions = [
+      "sts:AssumeRole"
+    ]
+
+    resources = ["${aws_iam_role.kiam_server.arn}"]
+  }
+}
+
 resource "aws_iam_policy" "kiam_assume" {
   name        = "eks-worker-kiam-assume-${var.cluster_name}"
   description = "EKS worker node KIAM Assume for cluster ${var.cluster_name}"

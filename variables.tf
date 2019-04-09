@@ -179,3 +179,13 @@ variable "kiam_vpc_subnets" {
   description = "A comma seperated string of subnets for the ASG to place kiam instances in"
   default     = ""
 }
+
+variable "kiam_asg_suspended_processes" {
+  description = "A comma seperated string of ASG suspended processes"
+  default = ""
+}
+
+variable "kiam_asg_enabled_metrics" {
+  description = "A comma seperated string of ASG enabled metrics"
+  default = ""
+}

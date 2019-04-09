@@ -25,8 +25,10 @@ KIAM is deployed on a dedicated set of nodes to ensure that other pods cannot el
 | kiam\_additonal\_userdata | Userdata to append to the standard userdata | string | `""` | no |
 | kiam\_ami\_id | KIAM instances AMI ID | string | `""` | no |
 | kiam\_asg\_desired | ASG Desired Size | string | `"2"` | no |
+| kiam\_asg\_enabled\_metrics | A comma seperated string of ASG enabled metrics | string | `""` | no |
 | kiam\_asg\_max | ASG Maximum Size | string | `"5"` | no |
 | kiam\_asg\_min | ASG Minimum Size | string | `"2"` | no |
+| kiam\_asg\_suspended\_processes | A comma seperated string of ASG suspended processes | string | `""` | no |
 | kiam\_autoscaling\_enabled | Allows cluster-autoscaler to manage this ASG | string | `"true"` | no |
 | kiam\_detailed\_monitoring | Enabled detailed monitoring of KIAM instances | string | `"false"` | no |
 | kiam\_instance\_type\_1 | First choice of instace type that will be used by the KIAM ASG | string | `"t3.small"` | no |

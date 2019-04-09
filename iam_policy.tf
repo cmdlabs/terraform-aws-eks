@@ -14,7 +14,7 @@ data "aws_iam_policy_document" "worker_autoscaling" {
       "autoscaling:DescribeAutoScalingInstances",
       "autoscaling:DescribeLaunchConfigurations",
       "autoscaling:DescribeTags",
-      "ec2:DescribeLaunchTemplateVersions",
+      "ec2:DescribeLaunchTemplateVersions"
     ]
 
     resources = ["*"]
@@ -284,43 +284,7 @@ data "aws_iam_policy_document" "worker_velero" {
       "s3:PutObject",
       "s3:AbortMultipartUpload",
       "s3:ListMultipartUploadParts",
-      "s3:ListBucket",
-    ]
-
-    resources = ["*"]
-  }
-}
-
-resource "aws_iam_policy" "kiam_worker_assume" {
-  name        = "eks-worker-kiam-worker-assume-${var.cluster_name}"
-  description = "EKS worker node KIAM Assume for cluster ${var.cluster_name}"
-  policy      = "${data.aws_iam_policy_document.kiam_worker_assume.json}"
-}
-
-data "aws_iam_policy_document" "kiam_worker_assume" {
-  statement {
-    effect = "Allow"
-
-    actions = [
-      "sts:AssumeRole",
-    ]
-
-    resources = ["${aws_iam_role.kiam_server.arn}"]
-  }
-}
-
-resource "aws_iam_policy" "kiam_assume" {
-  name        = "eks-worker-kiam-assume-${var.cluster_name}"
-  description = "EKS worker node KIAM Assume for cluster ${var.cluster_name}"
-  policy      = "${data.aws_iam_policy_document.kiam_assume.json}"
-}
-
-data "aws_iam_policy_document" "kiam_assume" {
-  statement {
-    effect = "Allow"
-
-    actions = [
-      "sts:AssumeRole",
+      "s3:ListBucket"
     ]
 
     resources = ["*"]

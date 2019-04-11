@@ -4,6 +4,8 @@ jobs:
     docker:
       - image: cmdlabs/terraform-utils:2.0.0
 
+    working_directory: examples
+    
     steps:
       - checkout
 
@@ -13,11 +15,11 @@ jobs:
 
       - run:
           name: Validate
-          command: terraform validate examples
+          command: terraform validate
 
       - run:
           name: Format Check
-          command: terraform fmt -check .
+          command: terraform fmt -check ../
 
 workflows:
   version: 2

@@ -8,8 +8,8 @@ jobs:
       - checkout
 
       - run:
-        name: Format Check
-        command: make formatCheck
+          name: Format Check
+          command: make formatCheck
   
   test:
     machine:

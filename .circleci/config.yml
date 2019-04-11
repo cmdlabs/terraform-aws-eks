@@ -14,3 +14,9 @@ jobs:
       - run:
           name: Format Check
           command: terraform fmt -check .
+
+workflows:
+  version: 2
+  test:
+    jobs:
+      - test

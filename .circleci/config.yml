@@ -10,7 +10,7 @@ jobs:
 
       - run:
           name: test
-          comand: make docs
+          command: make docs
       # - run:
       #     name: Init
       #     command: terraform init examples

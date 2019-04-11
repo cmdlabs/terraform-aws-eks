@@ -8,6 +8,10 @@ jobs:
       - checkout
 
       - run:
+          name: Init
+          command: terraform init
+
+      - run:
           name: Validate
           command: terraform validate examples
 

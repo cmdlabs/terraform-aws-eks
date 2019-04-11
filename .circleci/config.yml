@@ -2,7 +2,7 @@ version: 2
 jobs:
   test:
     machine:
-      image: ubuntu-1604:201903-01
+      image: circleci/classic:201808-01
     # docker:
     #   - image: cmdlabs/terraform-utils:2.0.0
     
@@ -10,19 +10,16 @@ jobs:
       - checkout
 
       - run:
-          name: test
-          command: make docs
-      # - run:
-      #     name: Init
-      #     command: terraform init examples
+          name: Init
+          command: make init
 
-      # - run:
-      #     name: Validate
-      #     command: terraform validate examples
+      - run:
+          name: Validate
+          command: make validate
 
-      # - run:
-      #     name: Format Check
-      #     command: terraform fmt -check .
+      - run:
+          name: Format Check
+          command: make formatCheck
 
 workflows:
   version: 2

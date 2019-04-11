@@ -1,10 +1,19 @@
 version: 2
 jobs:
+  format:
+    machine:
+      image: circleci/classic:201808-01
+    
+    steps:
+      - checkout
+
+      - run:
+        name: Format Check
+        command: make formatCheck
+  
   test:
     machine:
       image: circleci/classic:201808-01
-    # docker:
-    #   - image: cmdlabs/terraform-utils:2.0.0
     
     steps:
       - checkout
@@ -17,12 +26,9 @@ jobs:
           name: Validate
           command: make validate
 
-      - run:
-          name: Format Check
-          command: make formatCheck
-
 workflows:
   version: 2
   test:
     jobs:
+      - format
       - test

@@ -2,7 +2,7 @@ version: 2
 jobs:
   test:
     machine:
-      image: circleci/classic:201808-01
+      image: ubuntu-1604:201903-01
     # docker:
     #   - image: cmdlabs/terraform-utils:2.0.0
     

@@ -1,7 +1,8 @@
 version: 2
 jobs:
   test:
-    machine: true
+    machine:
+      image: circleci/classic:201808-01
     # docker:
     #   - image: cmdlabs/terraform-utils:2.0.0
     

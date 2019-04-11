@@ -1,3 +1,8 @@
+resource "" "name" {
+  
+}
+
+
 resource "aws_autoscaling_group" "workers" {
   count               = "${var.worker_group_count}"
   name_prefix         = "eks-${var.cluster_name}-workers-${count.index}"

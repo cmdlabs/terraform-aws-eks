@@ -1,23 +1,27 @@
 version: 2
 jobs:
   test:
-    docker:
-      - image: cmdlabs/terraform-utils:2.0.0
+    machine: true
+    # docker:
+    #   - image: cmdlabs/terraform-utils:2.0.0
     
     steps:
       - checkout
 
       - run:
-          name: Init
-          command: terraform init examples
+          name: test
+          comand: make docs
+      # - run:
+      #     name: Init
+      #     command: terraform init examples
 
-      - run:
-          name: Validate
-          command: terraform validate examples
+      # - run:
+      #     name: Validate
+      #     command: terraform validate examples
 
-      - run:
-          name: Format Check
-          command: terraform fmt -check .
+      # - run:
+      #     name: Format Check
+      #     command: terraform fmt -check .
 
 workflows:
   version: 2

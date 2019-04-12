@@ -189,3 +189,9 @@ variable "kiam_asg_enabled_metrics" {
   description = "A comma seperated string of ASG enabled metrics"
   default     = ""
 }
+
+variable "enabled_cluster_log_types" {
+  description = "A list of the desired control plane logging to enable"
+  type        = "list"
+  default     = ["api", "audit", "authenticator", "controllerManager", "scheduler"] 
+}

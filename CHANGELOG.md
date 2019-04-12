@@ -4,9 +4,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.5.0] - UNRELEASED
+## [0.5.0] - 2019-04-15
 ### Breaking
 - Clusters will now default to using KIAM for IAM roles. This requires KIAM to be active in your cluster for pods to use IAM role permissions. If you are deploying demo clusters this can be disabled via `enable_kiam`
+
+### Added
+- Added support for EKS Control Plane logs to Cloudwatch. Defaults to all logs enabled. 
 
 ### Fixed
 - Resolved issue where Launch Template based ASG's could not be scaled from 0. 

@@ -7,7 +7,7 @@ resource "aws_autoscaling_group" "workers" {
   vpc_zone_identifier = ["${split(",", coalesce(lookup(var.workers[count.index], "vpc_subnets", ""), join(",", var.private_subnets)))}"]
 
   suspended_processes = ["${compact(split(",", lookup(var.workers[count.index], "suspended_processes", "")))}"]
-  enabled_metrics = ["${compact(split(",", lookup(var.workers[count.index], "enabled_metrics", "")))}"]
+  enabled_metrics     = ["${compact(split(",", lookup(var.workers[count.index], "enabled_metrics", "")))}"]
 
   mixed_instances_policy {
     instances_distribution {
@@ -32,7 +32,6 @@ resource "aws_autoscaling_group" "workers" {
       override {
         instance_type = "${lookup(var.workers[count.index], "instance_type_2", "m4.large")}"
       }
-
     }
   }
 

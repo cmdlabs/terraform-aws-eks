@@ -1,7 +1,8 @@
 version: "3.7"
 services:
   terraform-utils:
-    image: deanillfeld/docker-terraform-utils:0.1
+    image: cmdlabs/terraform-utils:2.0.0
+    entrypoint: ""
     volumes:
       - .:/code
       - ~/.aws:/root/.aws

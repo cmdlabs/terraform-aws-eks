@@ -1,0 +1,26 @@
+version: 2
+jobs:
+  test:
+    machine:
+      image: circleci/classic:201808-01
+    
+    steps:
+      - checkout
+
+      - run:
+          name: Format Check
+          command: make formatCheck
+
+      - run:
+          name: Init
+          command: make init
+
+      - run:
+          name: Validate
+          command: make validate
+
+workflows:
+  version: 2
+  test:
+    jobs:
+      - test

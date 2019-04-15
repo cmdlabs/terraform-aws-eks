@@ -12,6 +12,8 @@ resource "aws_eks_cluster" "this" {
     endpoint_public_access  = "${var.cluster_endpoint_public_access}"
   }
 
+  enabled_cluster_log_types = "${var.enabled_cluster_log_types}"
+
   depends_on = [
     "aws_iam_role_policy_attachment.cluster_AmazonEKSClusterPolicy",
     "aws_iam_role_policy_attachment.cluster_AmazonEKSServicePolicy",

@@ -9,7 +9,7 @@ format:
 
 PHONY: formatCheck
 formatCheck:
-	docker-compose run --rm terraform-utils terraform fmt -check .
+	docker-compose run --rm terraform-utils terraform fmt -check -diff .
 
 PHONY: init
 init:

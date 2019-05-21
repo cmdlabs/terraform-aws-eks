@@ -13,8 +13,10 @@ formatCheck:
 
 PHONY: init
 init:
-	docker-compose run --rm terraform-utils terraform init examples
+	docker-compose run --rm terraform-utils terraform init tests/with_kiam
+	docker-compose run --rm terraform-utils terraform init tests/without_kiam
 
 PHONY: validate
 validate:
-	docker-compose run --rm terraform-utils terraform validate examples
+	docker-compose run --rm terraform-utils terraform validate tests/with_kiam
+	docker-compose run --rm terraform-utils terraform validate tests/without_kiam

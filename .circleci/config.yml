@@ -3,7 +3,7 @@ jobs:
   test:
     machine:
       image: circleci/classic:201808-01
-    
+
     steps:
       - checkout
 

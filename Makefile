@@ -20,8 +20,3 @@ PHONY: validate
 validate:
 	docker-compose run --rm terraform-utils terraform validate tests/with_kiam
 	docker-compose run --rm terraform-utils terraform validate tests/without_kiam
-
-PHONY: plan
-plan:
-	docker-compose run --rm terraform-utils terraform plan tests/with_kiam
-	docker-compose run --rm terraform-utils terraform plan tests/without_kiam

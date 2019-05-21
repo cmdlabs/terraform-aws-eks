@@ -19,10 +19,6 @@ jobs:
           name: Validate
           command: make validate
 
-      - run:
-          name: Plan
-          command: make plan
-
 workflows:
   version: 2
   test:

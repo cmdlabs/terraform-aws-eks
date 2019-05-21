@@ -1,5 +1,5 @@
 module "eks-cluster" {
-  source = "../"
+  source = "../../"
 
   cluster_name    = "cmdlab"
   cluster_version = "1.12"

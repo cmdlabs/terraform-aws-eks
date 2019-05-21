@@ -51,6 +51,8 @@ resource "aws_iam_role_policy_attachment" "kiam_workers_assume" {
 }
 
 data "aws_iam_policy_document" "kiam_server_trust_policy" {
+  count = "${var.enable_kiam ? 1 : 0 }"
+
   statement {
     actions = ["sts:AssumeRole"]
 
@@ -91,7 +93,7 @@ resource "aws_iam_role" "kiam_external_dns" {
 }
 
 resource "aws_iam_role_policy_attachment" "kiam_workers_external_dns" {
-  count      = "${var.enable_external_dns && !var.enable_kiam ? 1 : 0}"
+  count      = "${var.enable_external_dns && var.enable_kiam ? 1 : 0}"
   policy_arn = "${aws_iam_policy.worker_external_dns.arn}"
   role       = "${aws_iam_role.kiam_external_dns.name}"
 }

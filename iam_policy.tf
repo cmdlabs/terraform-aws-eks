@@ -293,7 +293,7 @@ data "aws_iam_policy_document" "worker_velero" {
 
 resource "aws_iam_policy" "kiam_worker_assume" {
   count = "${var.enable_kiam ? 1 : 0 }"
-  
+
   name        = "eks-worker-kiam-worker-assume-${var.cluster_name}"
   description = "EKS worker node KIAM Assume for cluster ${var.cluster_name}"
   policy      = "${data.aws_iam_policy_document.kiam_worker_assume.json}"

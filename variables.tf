@@ -8,12 +8,12 @@ variable "cluster_version" {
 
 variable "private_subnets" {
   description = "Private tier subnet list"
-  type        = "list"
+  type        = list(string)
 }
 
 variable "public_subnets" {
   description = "Public tier subnet list"
-  type        = "list"
+  type        = list(string)
 }
 
 variable "autotag_subnets" {
@@ -58,7 +58,7 @@ variable "enable_velero" {
 
 variable "workers" {
   description = "List of worker groups"
-  type        = "list"
+  type        = list(string)
 }
 
 variable "worker_group_count" {
@@ -146,7 +146,7 @@ variable "kiam_spot_max_price" {
 }
 
 variable "kiam_instance_type_1" {
-  description = "First choice of instace type that will be used by the KIAM ASG"
+  description = "First choice of instance type that will be used by the KIAM ASG"
   default     = "t3.small"
 }
 
@@ -192,6 +192,7 @@ variable "kiam_asg_enabled_metrics" {
 
 variable "enabled_cluster_log_types" {
   description = "A list of the desired control plane logging to enable"
-  type        = "list"
+  type        = list(string)
   default     = ["api", "audit", "authenticator", "controllerManager", "scheduler"]
 }
+

@@ -15,6 +15,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `kiam_vpc_subnets` is now a list
 - `kiam_asg_suspended_processes` is now a list
 - `kiam_asg_enabled_metrics` is now a list
+- `workers.vpc_subnets` is now a list
+- `workers.suspended_processes` is now a list
+- `workers.enabled_metrics` is now a list
 
 ## [0.5.0] - 2019-04-15
 ### Breaking

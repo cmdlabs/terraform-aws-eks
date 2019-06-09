@@ -58,7 +58,7 @@ variable "enable_velero" {
 
 variable "workers" {
   description = "List of worker groups"
-  type        = list(string)
+  type        = list
 }
 
 variable "worker_group_count" {
@@ -195,4 +195,3 @@ variable "enabled_cluster_log_types" {
   type        = list(string)
   default     = ["api", "audit", "authenticator", "controllerManager", "scheduler"]
 }
-

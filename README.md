@@ -1,6 +1,6 @@
 # terraform-aws-eks
 ## Summary
-This module implementes an EKS cluster and associated worker groups. It utilised the new mixed instance type autoscaling groups allowing you to switch between spot and on demand as required. 
+This module implementes an EKS cluster and associated worker groups. It utilised the new mixed instance type autoscaling groups allowing you to switch between spot and on demand as required.
 
 To improve the security of your clusters this module defaults to expecting KIAM to be deployed to manage IAM Role credentials for Pods. If you are deploying a demo cluster where security is not as important you can disable this with the `enable_kiam=false`. Then the the IAM Permissions managed by this module will be assigned directly to the worker nodes.
 
@@ -15,7 +15,7 @@ To improve the security of your clusters this module defaults to expecting KIAM 
 | enable\_alb\_ingress | Enable required components for ALB Ingress | string | `"true"` | no |
 | enable\_cert\_manager | Enable required components for Cert-Manager | string | `"true"` | no |
 | enable\_cluster\_autoscaler | Enable required components for Cluster Autoscaler | string | `"true"` | no |
-| enabled\_cluster\_log\_types | A list of the desired control plane logging to enable | list | `["api", "audit", "authenticator", "controllerManager", "scheduler"] ` | no | 
+| enabled\_cluster\_log\_types | A list of the desired control plane logging to enable | list | `["api", "audit", "authenticator", "controllerManager", "scheduler"] ` | no |
 | enable\_ecr | Enable required components for Amazon ECR Read Only | string | `"true"` | no |
 | enable\_external\_dns | Enable required components for External-DNS | string | `"true"` | no |
 | enable\_kiam | Create IAM roles and Nodes to be used by KIAM. Enabling this requires KIAM to be active and deployed to your cluster for IAM roles to work. | string | `"true"` | no |
@@ -50,7 +50,7 @@ To improve the security of your clusters this module defaults to expecting KIAM 
 
 
 ## Worker Group Options
-It is possible to customise individual parameters on the the workers list. 
+It is possible to customise individual parameters on the the workers list.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|----------|
@@ -68,8 +68,7 @@ It is possible to customise individual parameters on the the workers list.
 | spot\_allocation\_strategy | How to allocate capacity across the Spot pools | string | `"lowest-price"` | no |
 | spot\_instance\_pools | Number of Spot pools per availability zone to allocate capacity | string | `"10"` | no |
 | spot\_max\_price | Maximum price youre willing to pay for spot instances. Defaults to the on demand price if blank | string | `""` | no |
-| instance\_type\_1 | First instance type used by the ASG | string | `"m5.large"` | no |
-| instance\_type\_2 | Second instance type used by the ASG | string | `"m4.large"` | no |
+| instance\_types | Instance types used in the ASG | list(string) | `["m5.large", "m4.large"]` | no |
 | detailed\_monitoring | Enable EC2 detailed monitoring | string | `"false"` | no |
 | iam\_role\_name | Override the role that this module generates | string | `""` | no |
 | kubelet\_extra\_args | Additional arguments to pass to the kubelet | string| `""` | no |

@@ -50,12 +50,12 @@ resource "aws_autoscaling_group" "workers" {
         version            = "$Latest"
       }
 
-      override {
-        instance_type = lookup(var.workers[count.index], "instance_type_1", "m5.large")
-      }
+      dynamic "override" {
+        for_each = lookup(var.workers[count.index], "instance_types", ["m5.large", "m4.large"])
 
-      override {
-        instance_type = lookup(var.workers[count.index], "instance_type_2", "m4.large")
+        content {
+          instance_type = override.value
+        }
       }
     }
   }
@@ -176,4 +176,3 @@ resource "aws_security_group_rule" "worker_to_internet" {
   protocol          = "-1"
   cidr_blocks       = ["0.0.0.0/0"]
 }
-

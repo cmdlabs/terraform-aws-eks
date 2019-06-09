@@ -67,7 +67,7 @@ resource "aws_launch_template" "kiam_workers" {
   name_prefix = "eks-${var.cluster_name}-kiam-workers"
 
   image_id               = coalesce(var.kiam_ami_id, data.aws_ami.eks_worker.id)
-  instance_type          = var.kiam_instance_type_1
+  instance_type          = "t3.small"
   user_data              = base64encode(data.template_file.kiam_launch_template_userdata.rendered)
   vpc_security_group_ids = [aws_security_group.workers.id]
 

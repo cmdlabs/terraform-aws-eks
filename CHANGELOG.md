@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Worker group instances are now completely dynamic, you can specify as many instance types as you want.
+- KIAM worker group instances are now completely dynamic, you can specify as many instance types as you want.
 
 ## [0.5.0] - 2019-04-15
 ### Breaking

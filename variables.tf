@@ -145,14 +145,10 @@ variable "kiam_spot_max_price" {
   default     = ""
 }
 
-variable "kiam_instance_type_1" {
-  description = "First choice of instace type that will be used by the KIAM ASG"
-  default     = "t3.small"
-}
-
-variable "kiam_instance_type_2" {
-  description = "Second choice of instance type that will be used by the KIAM ASG"
-  default     = "t2.small"
+variable "kiam_instance_types" {
+  description = "Instace types that will be used by the KIAM ASG"
+  type        = list(string)
+  default     = ["t3.small", "t2.small"]
 }
 
 variable "kiam_detailed_monitoring" {

@@ -29,12 +29,12 @@ resource "aws_autoscaling_group" "kiam_workers" {
         version            = "$Latest"
       }
 
-      override {
-        instance_type = var.kiam_instance_type_1
-      }
+      dynamic "override" {
+        for_each = var.kiam_instance_types
 
-      override {
-        instance_type = var.kiam_instance_type_2
+        content {
+          instance_type = override.value
+        }
       }
     }
   }
@@ -101,4 +101,3 @@ resource "aws_iam_instance_profile" "kiam_workers_launch_template" {
   role  = aws_iam_role.workers_kiam[0].name
   count = var.enable_kiam ? 1 : 0
 }
-

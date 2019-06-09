@@ -30,8 +30,7 @@ To improve the security of your clusters this module defaults to expecting KIAM 
 | kiam\_asg\_suspended\_processes | A comma seperated string of ASG suspended processes | string | `""` | no |
 | kiam\_autoscaling\_enabled | Allows cluster-autoscaler to manage this ASG | string | `"true"` | no |
 | kiam\_detailed\_monitoring | Enabled detailed monitoring of KIAM instances | string | `"false"` | no |
-| kiam\_instance\_type\_1 | First choice of instace type that will be used by the KIAM ASG | string | `"t3.small"` | no |
-| kiam\_instance\_type\_2 | Second choice of instance type that will be used by the KIAM ASG | string | `"t2.small"` | no |
+| kiam\_instance\_types | Instace types that will be used by the KIAM ASG | string | `"["t3.small", "t2.small"]` | no |
 | kiam\_kubelet\_extra\_args | Additional arguments to pass to the kubelet | string | [KIAM](#kiam) | no |
 | kiam\_on\_demand\_allocation\_strategy | Strategy to use when launching on-demand instances | string | `"prioritized"` | no |
 | kiam\_on\_demand\_base\_capacity | Absolute minimum amount of desired capacity that must be fulfilled by on-demand instances | string | `"0"` | no |

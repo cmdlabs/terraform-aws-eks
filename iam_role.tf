@@ -42,7 +42,7 @@ resource "aws_iam_role_policy_attachment" "workers_AmazonEC2RoleforSSM" {
 }
 
 resource "aws_iam_role_policy_attachment" "workers_CloudWatchAgentServerPolicy" {
-  count = var.enable_container_insights ? 1 : 0
+  count = var.enable_container_insights && ! var.enable_kiam ? 1 : 0
   policy_arn = "arn:aws:iam::aws:policy/CloudWatchAgentServerPolicy"
   role = aws_iam_role.workers.name
 }

@@ -1,9 +1,9 @@
 resource "aws_autoscaling_group" "workers" {
-  count            = var.worker_group_count
-  name_prefix      = "eks-${var.cluster_name}-workers-${count.index}"
-  desired_capacity = lookup(var.workers[count.index], "asg_desired_capacity", 1)
-  min_size         = lookup(var.workers[count.index], "asg_min_size", 1)
-  max_size         = lookup(var.workers[count.index], "asg_max_size", 10)
+  count               = var.worker_group_count
+  name_prefix         = "eks-${var.cluster_name}-workers-${count.index}"
+  desired_capacity    = lookup(var.workers[count.index], "asg_desired_capacity", 1)
+  min_size            = lookup(var.workers[count.index], "asg_min_size", 1)
+  max_size            = lookup(var.workers[count.index], "asg_max_size", 10)
   vpc_zone_identifier = coalescelist(lookup(var.workers[count.index], "vpc_subnets", []), var.private_subnets)
 
   suspended_processes = lookup(var.workers[count.index], "suspended_processes", null)
@@ -12,24 +12,12 @@ resource "aws_autoscaling_group" "workers" {
 
   mixed_instances_policy {
     instances_distribution {
-      on_demand_allocation_strategy = lookup(
-        var.workers[count.index],
-        "on_demand_allocation_strategy",
-        "prioritized",
-      )
-      on_demand_base_capacity = lookup(var.workers[count.index], "on_demand_base_capacity", 0)
-      on_demand_percentage_above_base_capacity = lookup(
-        var.workers[count.index],
-        "on_demand_percentage_above_base_capacity",
-        0,
-      )
-      spot_allocation_strategy = lookup(
-        var.workers[count.index],
-        "spot_allocation_strategy",
-        "lowest-price",
-      )
-      spot_instance_pools = lookup(var.workers[count.index], "spot_instance_pools", 10)
-      spot_max_price      = lookup(var.workers[count.index], "spot_max_price", "")
+      on_demand_allocation_strategy            = lookup(var.workers[count.index], "on_demand_allocation_strategy", "prioritized")
+      on_demand_base_capacity                  = lookup(var.workers[count.index], "on_demand_base_capacity", 0)
+      on_demand_percentage_above_base_capacity = lookup(var.workers[count.index], "on_demand_percentage_above_base_capacity", 0)
+      spot_allocation_strategy                 = lookup(var.workers[count.index], "spot_allocation_strategy", "lowest-price")
+      spot_instance_pools                      = lookup(var.workers[count.index], "spot_instance_pools", 10)
+      spot_max_price                           = lookup(var.workers[count.index], "spot_max_price", "")
     }
 
     launch_template {
@@ -78,25 +66,14 @@ resource "aws_launch_template" "workers" {
   count       = var.worker_group_count
   name_prefix = "eks-${var.cluster_name}-workers-${count.index}"
 
-  image_id = lookup(
-    var.workers[count.index],
-    "ami_id",
-    data.aws_ami.eks_worker.id,
-  )
+  image_id      = lookup(var.workers[count.index], "ami_id", data.aws_ami.eks_worker.id)
   instance_type = lookup(var.workers[count.index], "instance_type_1", "m5.large")
-  user_data = base64encode(
-    element(
-      data.template_file.launch_template_userdata.*.rendered,
-      count.index,
-    ),
+  user_data = base64encode(element(data.template_file.launch_template_userdata.*.rendered, count.index, )
   )
   vpc_security_group_ids = [aws_security_group.workers.id, var.enable_alb_ingress ? join("", aws_security_group.alb_workers.*.id) : ""]
 
   iam_instance_profile {
-    name = element(
-      aws_iam_instance_profile.workers_launch_template.*.name,
-      count.index,
-    )
+    name = element(aws_iam_instance_profile.workers_launch_template.*.name, count.index)
   }
 
   block_device_mappings {
@@ -119,11 +96,7 @@ resource "aws_launch_template" "workers" {
 }
 
 resource "aws_iam_instance_profile" "workers_launch_template" {
-  role = lookup(
-    var.workers[count.index],
-    "iam_role_name",
-    aws_iam_role.workers.name,
-  )
+  role  = lookup(var.workers[count.index], "iam_role_name", aws_iam_role.workers.name)
   count = var.worker_group_count
 }
 

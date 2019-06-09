@@ -4,7 +4,7 @@ resource "aws_autoscaling_group" "workers" {
   desired_capacity = lookup(var.workers[count.index], "asg_desired_capacity", 1)
   min_size         = lookup(var.workers[count.index], "asg_min_size", 1)
   max_size         = lookup(var.workers[count.index], "asg_max_size", 10)
-  vpc_zone_identifier = coalescelist(var.workers[count.index].vpc_subnets, var.private_subnets)
+  vpc_zone_identifier = coalescelist(lookup(var.workers[count.index], "vpc_subnets", []), var.private_subnets)
 
   suspended_processes = lookup(var.workers[count.index], "suspended_processes", null)
 

@@ -1,7 +1,7 @@
 resource "aws_iam_policy" "worker_autoscaling" {
   name        = "eks-worker-autoscaling-${var.cluster_name}"
   description = "EKS worker node autoscaling policy for cluster ${var.cluster_name}"
-  policy      = "${data.aws_iam_policy_document.worker_autoscaling.json}"
+  policy      = data.aws_iam_policy_document.worker_autoscaling.json
 }
 
 data "aws_iam_policy_document" "worker_autoscaling" {
@@ -49,7 +49,7 @@ data "aws_iam_policy_document" "worker_autoscaling" {
 resource "aws_iam_policy" "worker_external_dns" {
   name        = "eks-worker-external-dns-${var.cluster_name}"
   description = "EKS worker node external dns for cluster ${var.cluster_name}"
-  policy      = "${data.aws_iam_policy_document.worker_external_dns.json}"
+  policy      = data.aws_iam_policy_document.worker_external_dns.json
 }
 
 data "aws_iam_policy_document" "worker_external_dns" {
@@ -80,7 +80,7 @@ data "aws_iam_policy_document" "worker_external_dns" {
 resource "aws_iam_policy" "worker_alb_ingress" {
   name        = "eks-worker-alb-ingress-${var.cluster_name}"
   description = "EKS worker node alb_ingress for cluster ${var.cluster_name}"
-  policy      = "${data.aws_iam_policy_document.worker_alb_ingress.json}"
+  policy      = data.aws_iam_policy_document.worker_alb_ingress.json
 }
 
 data "aws_iam_policy_document" "worker_alb_ingress" {
@@ -212,7 +212,7 @@ data "aws_iam_policy_document" "worker_alb_ingress" {
 resource "aws_iam_policy" "worker_cert_manager" {
   name        = "eks-worker-cert-manager-${var.cluster_name}"
   description = "EKS worker node cert-manager for cluster ${var.cluster_name}"
-  policy      = "${data.aws_iam_policy_document.worker_cert_manager.json}"
+  policy      = data.aws_iam_policy_document.worker_cert_manager.json
 }
 
 data "aws_iam_policy_document" "worker_cert_manager" {
@@ -256,7 +256,7 @@ data "aws_iam_policy_document" "worker_cert_manager" {
 resource "aws_iam_policy" "worker_velero" {
   name        = "eks-worker-velero-${var.cluster_name}"
   description = "EKS worker node velero for cluster ${var.cluster_name}"
-  policy      = "${data.aws_iam_policy_document.worker_velero.json}"
+  policy      = data.aws_iam_policy_document.worker_velero.json
 }
 
 data "aws_iam_policy_document" "worker_velero" {
@@ -292,15 +292,15 @@ data "aws_iam_policy_document" "worker_velero" {
 }
 
 resource "aws_iam_policy" "kiam_worker_assume" {
-  count = "${var.enable_kiam ? 1 : 0 }"
+  count = var.enable_kiam ? 1 : 0
 
   name        = "eks-worker-kiam-worker-assume-${var.cluster_name}"
   description = "EKS worker node KIAM Assume for cluster ${var.cluster_name}"
-  policy      = "${data.aws_iam_policy_document.kiam_worker_assume.json}"
+  policy      = data.aws_iam_policy_document.kiam_worker_assume[0].json
 }
 
 data "aws_iam_policy_document" "kiam_worker_assume" {
-  count = "${var.enable_kiam ? 1 : 0 }"
+  count = var.enable_kiam ? 1 : 0
 
   statement {
     effect = "Allow"
@@ -309,14 +309,14 @@ data "aws_iam_policy_document" "kiam_worker_assume" {
       "sts:AssumeRole",
     ]
 
-    resources = ["${aws_iam_role.kiam_server.arn}"]
+    resources = [aws_iam_role.kiam_server[0].arn]
   }
 }
 
 resource "aws_iam_policy" "kiam_assume" {
   name        = "eks-worker-kiam-assume-${var.cluster_name}"
   description = "EKS worker node KIAM Assume for cluster ${var.cluster_name}"
-  policy      = "${data.aws_iam_policy_document.kiam_assume.json}"
+  policy      = data.aws_iam_policy_document.kiam_assume.json
 }
 
 data "aws_iam_policy_document" "kiam_assume" {
@@ -330,3 +330,4 @@ data "aws_iam_policy_document" "kiam_assume" {
     resources = ["*"]
   }
 }
+

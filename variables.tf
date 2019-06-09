@@ -8,12 +8,12 @@ variable "cluster_version" {
 
 variable "private_subnets" {
   description = "Private tier subnet list"
-  type        = "list"
+  type        = list(string)
 }
 
 variable "public_subnets" {
   description = "Public tier subnet list"
-  type        = "list"
+  type        = list(string)
 }
 
 variable "autotag_subnets" {
@@ -58,7 +58,7 @@ variable "enable_velero" {
 
 variable "workers" {
   description = "List of worker groups"
-  type        = "list"
+  type        = list
 }
 
 variable "worker_group_count" {
@@ -145,14 +145,10 @@ variable "kiam_spot_max_price" {
   default     = ""
 }
 
-variable "kiam_instance_type_1" {
-  description = "First choice of instace type that will be used by the KIAM ASG"
-  default     = "t3.small"
-}
-
-variable "kiam_instance_type_2" {
-  description = "Second choice of instance type that will be used by the KIAM ASG"
-  default     = "t2.small"
+variable "kiam_instance_types" {
+  description = "Instace types that will be used by the KIAM ASG"
+  type        = list(string)
+  default     = ["t3.small", "t2.small"]
 }
 
 variable "kiam_detailed_monitoring" {
@@ -176,22 +172,23 @@ variable "kiam_additonal_userdata" {
 }
 
 variable "kiam_vpc_subnets" {
-  description = "A comma seperated string of subnets for the ASG to place kiam instances in"
-  default     = ""
+  description = "A list subnets for the ASG to place kiam instances in"
+  type        = list(string)
+  default     = []
 }
 
 variable "kiam_asg_suspended_processes" {
-  description = "A comma seperated string of ASG suspended processes"
-  default     = ""
+  description = "A list of ASG suspended processes"
+  default     = null
 }
 
 variable "kiam_asg_enabled_metrics" {
-  description = "A comma seperated string of ASG enabled metrics"
-  default     = ""
+  description = "A list of ASG enabled metrics"
+  default     = null
 }
 
 variable "enabled_cluster_log_types" {
   description = "A list of the desired control plane logging to enable"
-  type        = "list"
+  type        = list(string)
   default     = ["api", "audit", "authenticator", "controllerManager", "scheduler"]
 }

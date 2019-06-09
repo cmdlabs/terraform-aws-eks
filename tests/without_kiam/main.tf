@@ -25,8 +25,7 @@ module "eks-cluster" {
       spot_allocation_strategy                 = "lowest-price"
       spot_max_price                           = ""
 
-      instance_type_1 = "m5.large"
-      instance_type_2 = "m4.large"
+      instance_types = ["m5.large", "m4.large"]
 
       root_volume_size = 100
 

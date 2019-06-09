@@ -56,6 +56,11 @@ variable "enable_velero" {
   default     = true
 }
 
+variable "enable_container_insights" {
+  description = "Enable required components for Cloudwatch Container Insights"
+  default     = true
+}
+
 variable "workers" {
   description = "List of worker groups"
   type        = list

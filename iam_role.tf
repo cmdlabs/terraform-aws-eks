@@ -41,6 +41,12 @@ resource "aws_iam_role_policy_attachment" "workers_AmazonEC2RoleforSSM" {
   role = aws_iam_role.workers.name
 }
 
+resource "aws_iam_role_policy_attachment" "workers_CloudWatchAgentServerPolicy" {
+  count = var.enable_container_insights ? 1 : 0
+  policy_arn = "arn:aws:iam::aws:policy/CloudWatchAgentServerPolicy"
+  role = aws_iam_role.workers.name
+}
+
 resource "aws_iam_role_policy_attachment" "workers_autoscaling" {
   count = var.enable_cluster_autoscaler && ! var.enable_kiam ? 1 : 0
   policy_arn = aws_iam_policy.worker_autoscaling.arn

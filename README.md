@@ -21,6 +21,7 @@ To improve the security of your clusters this module defaults to expecting KIAM 
 | enable\_kiam | Create IAM roles and Nodes to be used by KIAM. Enabling this requires KIAM to be active and deployed to your cluster for IAM roles to work. | string | `"true"` | no |
 | enable\_ssm | Enable required components for SSM | string | `"true"` | no |
 | enable\_velero | Enable required components for Velero | string | `"true"` | no |
+| enable\_container\_insights | Enable required components for Cloudwatch Container Insights | string | `"true"` | no |
 | kiam\_additonal\_userdata | Userdata to append to the standard userdata | string | `""` | no |
 | kiam\_ami\_id | KIAM instances AMI ID | string | `""` | no |
 | kiam\_asg\_desired | ASG Desired Size | string | `"2"` | no |

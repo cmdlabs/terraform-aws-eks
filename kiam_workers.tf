@@ -5,13 +5,10 @@ resource "aws_autoscaling_group" "kiam_workers" {
   min_size         = var.kiam_asg_min
   max_size         = var.kiam_asg_max
 
-  vpc_zone_identifier = split(
-    ",",
-    coalesce(var.kiam_vpc_subnets, join(",", var.private_subnets)),
-  )
+  vpc_zone_identifier = coalescelist(var.kiam_vpc_subnets, var.private_subnets)
 
-  suspended_processes = compact(split(",", var.kiam_asg_suspended_processes))
-  enabled_metrics     = compact(split(",", var.kiam_asg_enabled_metrics))
+  suspended_processes = var.kiam_asg_suspended_processes
+  enabled_metrics     = var.kiam_asg_enabled_metrics
 
   mixed_instances_policy {
     instances_distribution {

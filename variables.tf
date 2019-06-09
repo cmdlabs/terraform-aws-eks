@@ -172,18 +172,19 @@ variable "kiam_additonal_userdata" {
 }
 
 variable "kiam_vpc_subnets" {
-  description = "A comma seperated string of subnets for the ASG to place kiam instances in"
-  default     = ""
+  description = "A list subnets for the ASG to place kiam instances in"
+  type        = list(string)
+  default     = []
 }
 
 variable "kiam_asg_suspended_processes" {
-  description = "A comma seperated string of ASG suspended processes"
-  default     = ""
+  description = "A list of ASG suspended processes"
+  default     = null
 }
 
 variable "kiam_asg_enabled_metrics" {
-  description = "A comma seperated string of ASG enabled metrics"
-  default     = ""
+  description = "A list of ASG enabled metrics"
+  default     = null
 }
 
 variable "enabled_cluster_log_types" {

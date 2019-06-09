@@ -7,10 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.6.0] - 2019-06-09
 ### Breaking
 - Terraform 0.12 is now required
+- Lists are used in place of comma seperated strings.
 
 ### Changed
-- Worker group instances are now completely dynamic, you can specify as many instance types as you want.
-- KIAM worker group instances are now completely dynamic, you can specify as many instance types as you want.
+- Worker group instances are now completely dynamic, you can specify as many instance types as you want with `worker_group_instance_types`
+- KIAM worker group instances are now completely dynamic, you can specify as many instance types as you want `kiam_instance_types`
+- `kiam_vpc_subnets` is now a list
+- `kiam_asg_suspended_processes` is now a list
+- `kiam_asg_enabled_metrics` is now a list
 
 ## [0.5.0] - 2019-04-15
 ### Breaking

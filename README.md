@@ -24,10 +24,10 @@ To improve the security of your clusters this module defaults to expecting KIAM 
 | kiam\_additonal\_userdata | Userdata to append to the standard userdata | string | `""` | no |
 | kiam\_ami\_id | KIAM instances AMI ID | string | `""` | no |
 | kiam\_asg\_desired | ASG Desired Size | string | `"2"` | no |
-| kiam\_asg\_enabled\_metrics | A comma seperated string of ASG enabled metrics | string | `""` | no |
+| kiam\_asg\_enabled\_metrics | A list of ASG enabled metrics | string | `null` | no |
 | kiam\_asg\_max | ASG Maximum Size | string | `"5"` | no |
 | kiam\_asg\_min | ASG Minimum Size | string | `"2"` | no |
-| kiam\_asg\_suspended\_processes | A comma seperated string of ASG suspended processes | string | `""` | no |
+| kiam\_asg\_suspended\_processes | A list of ASG suspended processes | string | `null` | no |
 | kiam\_autoscaling\_enabled | Allows cluster-autoscaler to manage this ASG | string | `"true"` | no |
 | kiam\_detailed\_monitoring | Enabled detailed monitoring of KIAM instances | string | `"false"` | no |
 | kiam\_instance\_types | Instace types that will be used by the KIAM ASG | string | `"["t3.small", "t2.small"]` | no |
@@ -40,7 +40,7 @@ To improve the security of your clusters this module defaults to expecting KIAM 
 | kiam\_spot\_allocation\_strategy | How to allocate capacity across the Spot pools | string | `"lowest-price"` | no |
 | kiam\_spot\_instance\_pools | Number of Spot pools per availability zone to allocate capacity | string | `"10"` | no |
 | kiam\_spot\_max\_price | Maximum price youre willing to pay for spot instances. Defaults to the on demand price if blank | string | `""` | no |
-| kiam\_vpc\_subnets | A comma seperated string of subnets for the ASG to place kiam instances in | string | `""` | no |
+| kiam\_vpc\_subnets | A list subnets for the ASG to place kiam instances in | list(string) | `var.private_subnets` | no |
 | private\_subnets | Private tier subnet list | list | n/a | yes |
 | public\_subnets | Public tier subnet list | list | n/a | yes |
 | vpc\_id | VPC ID for EKS Cluster | string | n/a | yes |

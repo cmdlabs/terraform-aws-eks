@@ -24,13 +24,13 @@ To improve the security of your clusters this module defaults to expecting KIAM 
 | kiam\_additonal\_userdata | Userdata to append to the standard userdata | string | `""` | no |
 | kiam\_ami\_id | KIAM instances AMI ID | string | `""` | no |
 | kiam\_asg\_desired | ASG Desired Size | string | `"2"` | no |
-| kiam\_asg\_enabled\_metrics | A list of ASG enabled metrics | string | `null` | no |
+| kiam\_asg\_enabled\_metrics | A list of ASG enabled metrics | list(string) | `null` | no |
 | kiam\_asg\_max | ASG Maximum Size | string | `"5"` | no |
 | kiam\_asg\_min | ASG Minimum Size | string | `"2"` | no |
-| kiam\_asg\_suspended\_processes | A list of ASG suspended processes | string | `null` | no |
+| kiam\_asg\_suspended\_processes | A list of ASG suspended processes | list(string) | `null` | no |
 | kiam\_autoscaling\_enabled | Allows cluster-autoscaler to manage this ASG | string | `"true"` | no |
 | kiam\_detailed\_monitoring | Enabled detailed monitoring of KIAM instances | string | `"false"` | no |
-| kiam\_instance\_types | Instace types that will be used by the KIAM ASG | string | `"["t3.small", "t2.small"]` | no |
+| kiam\_instance\_types | Instace types that will be used by the KIAM ASG | list(string) | `"["t3.small", "t2.small"]` | no |
 | kiam\_kubelet\_extra\_args | Additional arguments to pass to the kubelet | string | [KIAM](#kiam) | no |
 | kiam\_on\_demand\_allocation\_strategy | Strategy to use when launching on-demand instances | string | `"prioritized"` | no |
 | kiam\_on\_demand\_base\_capacity | Absolute minimum amount of desired capacity that must be fulfilled by on-demand instances | string | `"0"` | no |
@@ -59,8 +59,8 @@ It is possible to customise individual parameters on the the workers list.
 | desired\_capacity | ASG desired capacity. Ignored after creation | string | `"1"` | no |
 | min\_size | ASG minimum size | string | `"1"` | no |
 | max\_size | ASG maximum size | string | `"10"` | no |
-| suspended\_processes | A list of processes to suspend for the worker group | string | `null` | no |
-| enabled\_metrics | A list of ASG metrics to enable | string | `null` | no |
+| suspended\_processes | A list of processes to suspend for the worker group | list(string) | `null` | no |
+| enabled\_metrics | A list of ASG metrics to enable | list(string) | `null` | no |
 | on\_demand\_allocation\_strategy | Strategy to use when launching on-demand instances | string | `"prioritized"` | no |
 | on\_demand\_base\_capacity | Absolute minimum amount of desired capacity that must be fulfilled by on-demand instances | string | `"0"` | no |
 | on\_demand\_percentage\_above\_base_capacity | Percentage split between on-demand and spot instances above the base on-demand capacity | string | `"0"` | no |
@@ -73,7 +73,7 @@ It is possible to customise individual parameters on the the workers list.
 | kubelet\_extra\_args | Additional arguments to pass to the kubelet | string| `""` | no |
 | pre\_userdata | Userdata to prepend to the standard userdata | string | `""` | no |
 | additional\_userdata | Userdata to append to the standard userdata | string | `""` | no |
-| vpc\_subnets | A list of subnets for the ASG to place instances in | string | `var.private_subnets` | no
+| vpc\_subnets | A list of subnets for the ASG to place instances in | list(string) | `var.private_subnets` | no
 
 ## Outputs
 | Name | Description |

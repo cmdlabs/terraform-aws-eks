@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Terraform 0.12 is now required
 - Lists are used in place of comma seperated strings.
 
+### Added
+- Cloudwatch Container Insights support `enable_container_insights`
+
 ### Changed
 - Worker group instances are now completely dynamic, you can specify as many instance types as you want with `worker_group_instance_types`
 - KIAM worker group instances are now completely dynamic, you can specify as many instance types as you want `kiam_instance_types`

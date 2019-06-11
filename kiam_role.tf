@@ -45,6 +45,12 @@ resource "aws_iam_role_policy_attachment" "kiam_workers_AmazonEC2RoleforSSM" {
   role = aws_iam_role.workers_kiam[0].name
 }
 
+resource "aws_iam_role_policy_attachment" "kiam_workers_CloudWatchAgentServerPolicy" {
+  count = var.enable_container_insights && var.enable_kiam ? 1 : 0
+  policy_arn = "arn:aws:iam::aws:policy/CloudWatchAgentServerPolicy"
+  role = aws_iam_role.workers_kiam[0].name
+}
+
 resource "aws_iam_role_policy_attachment" "kiam_workers_assume" {
   count = var.enable_kiam ? 1 : 0
   policy_arn = aws_iam_policy.kiam_worker_assume[0].arn
@@ -146,4 +152,3 @@ resource "aws_iam_role_policy_attachment" "kiam_velero" {
   policy_arn = aws_iam_policy.worker_velero.arn
   role = aws_iam_role.kiam_velero[0].name
 }
-

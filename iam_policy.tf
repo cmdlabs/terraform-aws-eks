@@ -110,6 +110,7 @@ data "aws_iam_policy_document" "worker_alb_ingress" {
       "ec2:DescribeInstances",
       "ec2:DescribeInstanceStatus",
       "ec2:DescribeInternetGateways",
+      "ec2:DescribeNetworkInterfaces",
       "ec2:DescribeSecurityGroups",
       "ec2:DescribeSubnets",
       "ec2:DescribeTags",

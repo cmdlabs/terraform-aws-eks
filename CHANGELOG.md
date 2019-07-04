@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.6.1] - 2019-07-04
 ### Fixed
 - Resolved issue that prevented cluster-autoscaler from autoscaling workers.
+### Added
+- Added ec2:DescribeNetworkInterfaces to alb-ingress policy
 
 ## [0.6.0] - 2019-06-09
 ### Breaking

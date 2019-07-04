@@ -54,7 +54,7 @@ resource "aws_autoscaling_group" "kiam_workers" {
         "propagate_at_launch" = "true"
       },
       {
-        "key"                 = "k8s.io/cluster-autoscaler/${var.kiam_autoscaling_enabled == 1 ? "enabled" : "disabled"}"
+        "key"                 = "k8s.io/cluster-autoscaler/${var.kiam_autoscaling_enabled == true ? "enabled" : "disabled"}"
         "value"               = "true"
         "propagate_at_launch" = "false"
       },

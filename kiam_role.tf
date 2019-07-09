@@ -1,62 +1,3 @@
-resource "aws_iam_role" "workers_kiam" {
-  count = var.enable_kiam ? 1 : 0
-
-  name = "eks-${var.cluster_name}-workers-kiam"
-
-  assume_role_policy = <<EOF
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Action": "sts:AssumeRole",
-      "Principal": {
-        "Service": "ec2.amazonaws.com"
-      },
-      "Effect": "Allow",
-      "Sid": ""
-    }
-  ]
-}
-EOF
-
-}
-
-resource "aws_iam_role_policy_attachment" "kiam_workers_AmazonEKSWorkerNodePolicy" {
-  count = var.enable_kiam ? 1 : 0
-  policy_arn = "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy"
-  role = aws_iam_role.workers_kiam[0].name
-}
-
-resource "aws_iam_role_policy_attachment" "kiam_workers_AmazonEKS_CNI_Policy" {
-  count = var.enable_kiam ? 1 : 0
-  policy_arn = "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy"
-  role = aws_iam_role.workers_kiam[0].name
-}
-
-resource "aws_iam_role_policy_attachment" "kiam_workers_AmazonEC2ContainerRegistryReadOnly" {
-  count = var.enable_ecr && var.enable_kiam ? 1 : 0
-  policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
-  role = aws_iam_role.workers_kiam[0].name
-}
-
-resource "aws_iam_role_policy_attachment" "kiam_workers_AmazonEC2RoleforSSM" {
-  count = var.enable_ssm && var.enable_kiam ? 1 : 0
-  policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonEC2RoleforSSM"
-  role = aws_iam_role.workers_kiam[0].name
-}
-
-resource "aws_iam_role_policy_attachment" "kiam_workers_CloudWatchAgentServerPolicy" {
-  count = var.enable_container_insights && var.enable_kiam ? 1 : 0
-  policy_arn = "arn:aws:iam::aws:policy/CloudWatchAgentServerPolicy"
-  role = aws_iam_role.workers_kiam[0].name
-}
-
-resource "aws_iam_role_policy_attachment" "kiam_workers_assume" {
-  count = var.enable_kiam ? 1 : 0
-  policy_arn = aws_iam_policy.kiam_worker_assume[0].arn
-  role = aws_iam_role.workers_kiam[0].name
-}
-
 data "aws_iam_policy_document" "kiam_server_trust_policy" {
   count = var.enable_kiam ? 1 : 0
 
@@ -65,7 +6,7 @@ data "aws_iam_policy_document" "kiam_server_trust_policy" {
 
     principals {
       type = "AWS"
-      identifiers = ["arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/eks-${var.cluster_name}-workers-kiam"]
+      identifiers = ["arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/eks-${var.cluster_name}-workers"]
     }
   }
 }

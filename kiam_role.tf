@@ -29,7 +29,7 @@ data "aws_iam_policy_document" "kiam_role_trust_policy" {
 
     principals {
       type        = "AWS"
-      identifiers = ["arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/eks-${var.cluster_name}-kiam-server"]
+      identifiers = [aws_iam_role.kiam_server.arn]
     }
   }
 }

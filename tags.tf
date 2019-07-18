@@ -1,5 +1,5 @@
 locals {
-  optional_profile = var.autotag_profile ? "--profile ${var.autotag_profile}" : ""
+  optional_profile = length(var.autotag_profile) > 0 ? "--profile ${var.autotag_profile}" : ""
 }
 
 resource "null_resource" "tag-public-subnet" {

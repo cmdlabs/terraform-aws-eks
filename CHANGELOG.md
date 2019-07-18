@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Breaking
 - KIAM no longer has dedicated nodes. This is possible now that KIAM has an option to not remove the iptables rule on shutdown resulting in a fail secure design.
 - ALB Ingress no longer has security groups created and managed by this module.
+### Added
+- Autotagging now has the capability to specify which AWS profile the aws-cli uses.
 
 ## [0.6.1] - 2019-07-04
 ### Fixed

@@ -8,6 +8,7 @@ To improve the security of your clusters this module defaults to expecting KIAM 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
 | autotag\_subnets | Automatically add Kubernetes tags to subnets. Requires aws-cli to be available. | string | `"false"` | no |
+| autotag\_profile | Defines an optional AWS profile to use with aws-cli when auto-tagging subnets | string | `"false"` | no |
 | cluster\_endpoint\_private\_access | Enable Amazon EKS private API server endpoint. | string | `"false"` | no |
 | cluster\_endpoint\_public\_access | Enable Amazon EKS public API server endpoint. | string | `"true"` | no |
 | cluster\_name | Name of the EKS Cluster | string | n/a | yes |

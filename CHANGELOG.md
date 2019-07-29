@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.7.0] - 2019-07-09
+### Breaking
+- KIAM no longer has dedicated nodes. This is possible now that KIAM has an option to not remove the iptables rule on shutdown resulting in a fail secure design.
+- ALB Ingress no longer has security groups created and managed by this module.
+### Added
+- Autotagging now has the capability to specify which AWS profile the aws-cli uses.
+
 ## [0.6.1] - 2019-07-04
 ### Fixed
 - Resolved issue that prevented cluster-autoscaler from autoscaling workers.

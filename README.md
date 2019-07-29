@@ -8,6 +8,7 @@ To improve the security of your clusters this module defaults to expecting KIAM 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
 | autotag\_subnets | Automatically add Kubernetes tags to subnets. Requires aws-cli to be available. | string | `"false"` | no |
+| autotag\_profile | Defines an optional AWS profile to use with aws-cli when auto-tagging subnets | string | `"false"` | no |
 | cluster\_endpoint\_private\_access | Enable Amazon EKS private API server endpoint. | string | `"false"` | no |
 | cluster\_endpoint\_public\_access | Enable Amazon EKS public API server endpoint. | string | `"true"` | no |
 | cluster\_name | Name of the EKS Cluster | string | n/a | yes |
@@ -18,36 +19,15 @@ To improve the security of your clusters this module defaults to expecting KIAM 
 | enabled\_cluster\_log\_types | A list of the desired control plane logging to enable | list | `["api", "audit", "authenticator", "controllerManager", "scheduler"] ` | no |
 | enable\_ecr | Enable required components for Amazon ECR Read Only | string | `"true"` | no |
 | enable\_external\_dns | Enable required components for External-DNS | string | `"true"` | no |
-| enable\_kiam | Create IAM roles and Nodes to be used by KIAM. Enabling this requires KIAM to be active and deployed to your cluster for IAM roles to work. | string | `"true"` | no |
+| enable\_kiam | Create IAM roles to be used by KIAM. Enabling this requires KIAM to be active and deployed to your cluster for IAM roles to work. | string | `"true"` | no |
 | enable\_ssm | Enable required components for SSM | string | `"true"` | no |
 | enable\_velero | Enable required components for Velero | string | `"true"` | no |
 | enable\_container\_insights | Enable required components for Cloudwatch Container Insights | string | `"true"` | no |
-| kiam\_additonal\_userdata | Userdata to append to the standard userdata | string | `""` | no |
-| kiam\_ami\_id | KIAM instances AMI ID | string | `""` | no |
-| kiam\_asg\_desired | ASG Desired Size | string | `"2"` | no |
-| kiam\_asg\_enabled\_metrics | A list of ASG enabled metrics | list(string) | `null` | no |
-| kiam\_asg\_max | ASG Maximum Size | string | `"5"` | no |
-| kiam\_asg\_min | ASG Minimum Size | string | `"2"` | no |
-| kiam\_asg\_suspended\_processes | A list of ASG suspended processes | list(string) | `null` | no |
-| kiam\_autoscaling\_enabled | Allows cluster-autoscaler to manage this ASG | string | `"true"` | no |
-| kiam\_detailed\_monitoring | Enabled detailed monitoring of KIAM instances | string | `"false"` | no |
-| kiam\_instance\_types | Instace types that will be used by the KIAM ASG | list(string) | `"["t3.small", "t2.small"]` | no |
-| kiam\_kubelet\_extra\_args | Additional arguments to pass to the kubelet | string | [KIAM](#kiam) | no |
-| kiam\_on\_demand\_allocation\_strategy | Strategy to use when launching on-demand instances | string | `"prioritized"` | no |
-| kiam\_on\_demand\_base\_capacity | Absolute minimum amount of desired capacity that must be fulfilled by on-demand instances | string | `"0"` | no |
-| kiam\_on\_demand\_percentage\_above\_base\_capacity | Percentage split between on-demand and spot instances above the base on-demand capacity | string | `"0"` | no |
-| kiam\_pre\_userdata | Userdata to prepend to the standard userdata | string | `""` | no |
-| kiam\_root\_volume\_size | KIAM instances root volume size | string | `"100"` | no |
-| kiam\_spot\_allocation\_strategy | How to allocate capacity across the Spot pools | string | `"lowest-price"` | no |
-| kiam\_spot\_instance\_pools | Number of Spot pools per availability zone to allocate capacity | string | `"10"` | no |
-| kiam\_spot\_max\_price | Maximum price youre willing to pay for spot instances. Defaults to the on demand price if blank | string | `""` | no |
-| kiam\_vpc\_subnets | A list subnets for the ASG to place kiam instances in | list(string) | `var.private_subnets` | no |
 | private\_subnets | Private tier subnet list | list | n/a | yes |
 | public\_subnets | Public tier subnet list | list | n/a | yes |
 | vpc\_id | VPC ID for EKS Cluster | string | n/a | yes |
 | worker\_group\_count | Count of worker groups. Set to 0 to disable worker creation | string | `"1"` | no |
 | workers | List of worker groups | list | n/a | yes |
-
 
 ## Worker Group Options
 It is possible to customise individual parameters on the the workers list.
@@ -81,10 +61,3 @@ It is possible to customise individual parameters on the the workers list.
 |------|-------------|
 | cluster\_certificate\_authority | Cluster Certificate Authority Certificate |
 | cluster\_endpoint | Cluster Kubernetes API endpoint |
-
-## KIAM
-KIAM is deployed on a dedicated set of nodes to ensure that other pods cannot elevate their permissions in the event they find a way to bypass KIAM-Agent.
-
-The kubelet arguments default to following to prevent other workloads from scheduling onto the KIAM nodes.
-
-`"--node-labels=spot=true,node-role.kubernetes.io/kiam=true --register-with-taints=node-role.kubernetes.io/kiam=true:NoSchedule"`

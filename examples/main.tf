@@ -1,5 +1,5 @@
 module "eks-cluster" {
-  source = "github.com/cmdlabs/terraform-aws-eks?ref=0.6.0"
+  source = "github.com/cmdlabs/terraform-aws-eks?ref=0.7.0"
 
   cluster_name    = "cmdlab"
   cluster_version = "1.12"

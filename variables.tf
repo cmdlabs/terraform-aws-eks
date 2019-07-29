@@ -23,7 +23,7 @@ variable "autotag_subnets" {
 
 variable "autotag_profile" {
   description = "Defines an optional AWS profile to use with aws-cli when auto-tagging subnets"
-  default     = false
+  default     = ""
 }
 
 variable "enable_cert_manager" {

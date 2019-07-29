@@ -1,5 +1,5 @@
 locals {
-  optional_profile = length(var.autotag_profile) > 0 ? "--profile ${var.autotag_profile}" : ""
+  optional_profile = var.autotag_profile != "" ? "--profile ${var.autotag_profile}" : ""
 }
 
 resource "null_resource" "tag-public-subnet" {
@@ -25,4 +25,3 @@ resource "null_resource" "tag-private-subnet" {
     command = "aws ec2 create-tags --resources ${join(" ", var.private_subnets)} --tags Key=kubernetes.io/cluster/${var.cluster_name},Value=shared Key=kubernetes.io/role/internal-elb,Value=1 ${local.optional_profile}"
   }
 }
-

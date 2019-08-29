@@ -80,3 +80,13 @@ resource "aws_security_group_rule" "additional_sg_ingress" {
   protocol                 = "tcp"
   source_security_group_id = var.cluster_access_additional_sg[count.index]
 }
+
+resource "aws_security_group_rule" "additional_ip_ingress" {
+  count                    = length(var.cluster_access_additional_ip)
+  security_group_id        = aws_security_group.cluster.id
+  type                     = "ingress"
+  from_port                = 443
+  to_port                  = 443
+  protocol                 = "tcp"
+  cidr_blocks               = var.cluster_access_additional_ip[count.index]
+}

@@ -106,3 +106,9 @@ variable "cluster_access_additional_sg" {
   type        = list(string)
   default     = []
 }
+
+variable "cluster_access_additional_ip" {
+  description = "A list of additional ip ranges that are allowed access to the API server"
+  type        = list(string)
+  default     = []
+}

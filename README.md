@@ -28,8 +28,8 @@ To improve the security of your clusters this module defaults to expecting KIAM 
 | vpc\_id | VPC ID for EKS Cluster | string | n/a | yes |
 | worker\_group\_count | Count of worker groups. Set to 0 to disable worker creation | string | `"1"` | no |
 | workers | List of worker groups | list | n/a | yes |
-| cluster_access_additional_sg | Security groups allowed access to the API server | list | n/a | no |
-| cluster_access_additional_ip | CIDRs allowed access to the API server | list | n/a | no |
+| cluster_access_additional_sg | Security groups allowed access to the API server | list | `[]` | no |
+| cluster_access_additional_ip | CIDRs allowed access to the API server | list | `[]` | no |
 
 ## Worker Group Options
 It is possible to customise individual parameters on the the workers list.

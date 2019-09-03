@@ -100,3 +100,15 @@ variable "enabled_cluster_log_types" {
   type        = list(string)
   default     = ["api", "audit", "authenticator", "controllerManager", "scheduler"]
 }
+
+variable "cluster_access_additional_sg" {
+  description = "A list of additional security groups that are allowed access to the API server"
+  type        = list(string)
+  default     = []
+}
+
+variable "cluster_access_additional_ip" {
+  description = "A list of additional ip ranges that are allowed access to the API server"
+  type        = list(string)
+  default     = []
+}

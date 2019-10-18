@@ -70,7 +70,8 @@ resource "aws_launch_template" "workers" {
   instance_type = lookup(var.workers[count.index], "instance_type_1", "m5.large")
   user_data = base64encode(element(data.template_file.launch_template_userdata.*.rendered, count.index, )
   )
-  vpc_security_group_ids = [aws_security_group.workers.id]
+
+  vpc_security_group_ids = lookup(var.workers[count.index], "additional_security_groups", aws_security_group.workers.id)
 
   iam_instance_profile {
     name = element(aws_iam_instance_profile.workers_launch_template.*.name, count.index)
